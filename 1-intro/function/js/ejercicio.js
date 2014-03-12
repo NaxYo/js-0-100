@@ -7,7 +7,7 @@ var EJERCICIO = (function() {
 	function tapaDeAPoco() {
 		context.beginPath();
 		context.rect(0, 0, width, height);
-		context.fillStyle = 'rgba(255, 255, 255, .1)';
+		context.fillStyle = 'rgba(255, 255, 255, .15)';
 		context.fill();
 	}
 
@@ -22,6 +22,7 @@ var EJERCICIO = (function() {
 	}
 
 	// 4. Incluye una linea para llamar a la función tapaDeAPoco cada 1/4 de segundo
+	setInterval(tapaDeAPoco, 250);
 
 	return function() {
 		/*
@@ -32,6 +33,27 @@ var EJERCICIO = (function() {
 		 *
 		 * 3. Dibuja cada circulo en un color aleatorio
 		 */
+		 var nextColor = function() {
+		 	return {r:Math.floor(Math.random()*255), g:Math.floor(Math.random()*255), b:Math.floor(Math.random()*255)};
+		 }
+
+		 if(arguments.length > 0) {
+		 	for(var x in arguments) {
+		 		var arg = arguments[x];
+		 		var color = nextColor();
+		 		if(arg.length < 3) {
+		 			dibujaCirculo(arg[0], arg[1], 15, color);
+		 		} else {
+		 			dibujaCirculo(arg[0], arg[1], arg[2], color);
+		 		}
+		 	}
+		 } else {
+		 	var numCirculos = Math.floor(Math.random()*20);
+		 	for(var x=0;x<numCirculos;x++) {
+		 		color = nextColor();
+		 		dibujaCirculo(Math.random()*width, Math.random()*height, 15, color);
+		 	}
+		 }
 	};
 })();
 
