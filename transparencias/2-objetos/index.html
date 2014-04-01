@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>JavaScript de 0 a 100 | #2 - A partir de hoy nos tratamos de usted </title>
+
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+<div class="slides">
+    <section>
+        <section>
+            <h1>JavaScript</h1>
+<h1>de 0 a 100</h1>
+<div>
+            <br>
+        </div>
+<div>#2 - A partir de hoy nos tratamos de usted</div>
+<div>
+        <br>
+    </div>
+<div>
+<img src="https://s3.amazonaws.com/media-p.slid.es/uploads/nax/images/283536/bigote.png" style="width: 565.80233966285px; height: 175.33289371194357px; max-height: none; max-width: none;">
+    <br>
+</div>
+</section>
+<section data-background-size="cover" data-background-image="https://s3.amazonaws.com/media-p.slid.es/uploads/nax/images/283496/giphy__3_.gif">
+<h2>
+<span style="background-color: rgba(0, 0, 0, 0.498039); color: rgb(255, 255, 255); font-size: 75.96px;">&nbsp;Ejercicios&nbsp;</span>
+    <br>
+</h2>
+</section>
+<section>
+<h2>Moverse por el DOM</h2>
+<div>
+    <br>
+</div>
+<pre><br>  &lt;body&gt;
+    &lt;p&gt;
+      &lt;span class="verso-n"&gt;...&lt;/span&gt;...
+    &lt;/p&gt;
+  &lt;/body&gt;<br><br></pre>
+<div>añadir verso<span style="color: rgba(255,255,255,.5)"> - añadir saltos de linea - ordenar</span>
+</div>
+<pre class="fragment" data-fragment-index="0">
+<br>  function addVerso(verso) {
+    var verso = document.createElement('span');
+    verso.classList.add('verso-14');
+    verso.value = verso;
+    document.querySelector('p').appendChild(verso);
+  }<br>
+</pre>
+
+<br>
+</section>
+<section>
+<h2>Moverse por el DOM</h2>
+<div>
+    <br>
+</div>
+<pre><br>  &lt;body&gt;
+    &lt;p&gt;
+      &lt;span class="verso-n"&gt;...&lt;/span&gt;...
+    &lt;/p&gt;
+  &lt;/body&gt;<br><br></pre>
+<div>
+<span style="color: rgba(255,255,255,.5)">añadir verso - </span>añadir saltos de linea<span style="color: rgba(255,255,255,.5)"> - ordenar</span>
+</div>
+<pre><br>  function addSaltos() {
+    var versos = document.querySelectorAll('span');
+
+    for(var i=0; i&lt;versos.length; i++)
+      versos[i].classList.add('linea');
+  }<br><br></pre>
+<br>
+</section>
+<section>
+<h2>Moverse por el DOM</h2>
+<span style="color: rgba(255,255,255,.5)">añadir verso - añadir saltos de linea - </span>ordenar
+
+<pre><br>  function ordenar() {
+    var versosOriginales = document.querySelectorAll('span');
+    var versosOrdenados  = {};
+
+    for(var i=0; i&lt;versosOriginales.length; i++) {
+      var clase = versosOriginales[i].classList[0];
+      var n     = parseInt(clase.split('-')[1]);
+
+      versosOrdenados[n] = versosOriginales[i];
+    }
+
+    var p = document.querySelector('p')
+    p.innerHTML = '';
+
+    for(var j in versosOrdenados)
+      p.appendChild(versosOrdenados[j]);
+  }<br><br></pre>
+<br>
+</section>
+<section>
+<h2>ÁMBITO de variables y</h2>
+<h2>funciones anónimas</h2>
+<div>
+<br>
+</div>
+<pre><br>  function EJERCICIO() {
+    var funciones = [];
+    var salida = document.getElementById('salida');
+
+    for(var i=1; i&lt;=10; i++)
+      funciones.push(function() {
+        salida.innerHTML = salida.innerHTML+i+'&nbsp;';
+      });
+
+    salida.innerText = '';
+    for(var f in funciones)
+      funciones[f]();
+  }<br><br></pre>
+
+<br>
+</section>
+<section>
+<h2>ÁMBITO de variables y</h2>
+<h2>funciones anónimas</h2>
+<div>
+<br>
+</div>
+<pre><br>  function EJERCICIO() {
+    var funciones = [];
+    var salida = document.getElementById('salida');
+
+    for(var i=1; i&lt;=10; i++)
+      funciones.push(function(val) {
+        return function() {
+          salida.innerHTML = salida.innerHTML+val+'&nbsp;';
+        };
+      }(i));
+
+    salida.innerText = '';
+    for(var f in funciones)
+      funciones[f]();
+  }<br><br></pre>
+
+</section>
+<section>
+    <h2>Funciones, parámetros y más</h2>
+<div>
+    <br>
+</div>
+<div>
+<br>
+</div>
+<div>
+<br>
+</div>
+<div>
+<a href="https://github.com/jvlobo/js-0-100/blob/master/1-intro/function/js/ejercicio.js">https://github.com/jvlobo/js-0-100/blob/master/1-intro/function/js/ejercicio.js</a>
+<br>
+</div>
+
+</section>
+<section data-background-image="https://s3.amazonaws.com/media-p.slid.es/uploads/nax/images/283499/giphy__1_.gif">
+    <h2>
+        <br>
+    </h2>
+<h2>
+    <br>
+</h2>
+<h2>
+<font color="#000000" style="background-color: rgba(255, 255, 255, 0.498039);">&nbsp;Gracias lobo!&nbsp;</font>
+</h2>
+</section>
+</section>
+<section>
+    <section data-background-image="https://s3.amazonaws.com/media-p.slid.es/uploads/nax/images/285104/giphy__4_.gif">
+        <h2>
+            <br>
+        </h2>
+<h2>
+        <br>
+    </h2>
+<h2>
+    <span style="background-color: rgba(0, 0, 0, 0.498039);">&nbsp;Objetos De javascript&nbsp;</span>
+</h2>
+</section>
+<section>
+    <h2>Array</h2>
+<pre style="display: inline-block; width: 450px;">
+    <br>  var array1 = new Array;
+  var array2 = [];
+  var array3 = [1, 4, 7].reverse();
+  var array4 = [1, true, {radio: 2}];
+  array3.push(4);
+  console.log(array3.shift());
+  console.log(array3.pop());
+  
+</pre>
+<pre style="display: inline-block; width: 450px;">
+    <br>  [5, 2, 7, 1].every(function(e) {
+    return e&gt;2;
+  });
+  
+  [1, 2, 3, 4].map(function(e) {
+    return e*2;
+  });
+  
+</pre>
+<div>
+<br>
+</div>
+<div>
+    <ul>
+<li>Manipulación: join, concat, slice, splice</li>
+            <li>stack: push, pop, shift, unshift</li>
+            <li>Orden: reverse, sort</li>
+            <li>Búsqueda: indexOf, lastIndexOf</li>
+            <li>Métodos iterativos: every, some, filter, map, forEach</li>
+            <li>Métodos de reducción: reduce, reduceRight</li>
+        
+    </ul>
+</div>
+
+
+
+
+
+
+
+
+</section>
+    <section>
+<h2>Function</h2>
+<pre>        <br>  miFuncion1();
+  miFuncion2();
+
+  // Function declaration
+  function miFuncion1() { console.log('esto rula'); };
+  
+  // Function expression
+  var miFuncion2 = function() { console.log('esto puede que rule'); };
+  
+  miFuncion1();
+  miFuncion2();
+  
+  var objeto = {
+    nombre: 'Paco',
+    muestra: function() { alert('My name is '+this.nombre); }
+  };
+  
+  var otraFuncion = objeto.muestra;
+  objeto.muestra();
+  otraFuncion();<br>
+</pre>
+        <br>
+    </section>
+    <section data-background-image="https://s3.amazonaws.com/media-p.slid.es/uploads/nax/images/283572/giphy__10_.gif">
+        <h2>
+    <span style="background-color: rgba(0, 0, 0, 0.498039);">&nbsp;OTROS Objetos disponibles&nbsp;</span>
+</h2>
+<div>
+    <span style="text-align: left;">
+        <br>
+    </span>
+</div>
+<div>
+    <span style="text-align: left;">
+        <br>
+</span>
+</div>
+<div>
+    <br>
+</div>
+<div>
+    <span style="text-align: left;">
+        <br>
+</span>
+</div>
+<div>
+    <span style="background-color: rgba(0, 0, 0, 0.5);text-align: left;" class="fragment" data-fragment-index="0">&nbsp;Regexp&nbsp;</span>
+    <span style="background-color: rgba(0, 0, 0, 0.5);text-align: left;" class="fragment" data-fragment-index="1">&nbsp;Date&nbsp;</span>
+    <span style="background-color: rgba(0, 0, 0, 0.5);text-align: left;" class="fragment" data-fragment-index="2">&nbsp;Math&nbsp;</span>
+    <span style="background-color: rgba(0, 0, 0, 0.5);text-align: left;" class="fragment" data-fragment-index="3">&nbsp;Number&nbsp;</span>
+    <span style="background-color: rgba(0, 0, 0, 0.5);text-align: left;" class="fragment" data-fragment-index="4">&nbsp;String&nbsp;</span>
+    <span style="background-color: rgba(0, 0, 0, 0.5);text-align: left;" class="fragment" data-fragment-index="5">&nbsp;Boolean&nbsp;</span>
+</div>
+<div>
+    <br>
+</div>
+<div>
+    <br>
+</div>
+
+<div class="fragment" style="background-color: rgba(255, 255, 255, 0.5); color: #000;" data-fragment-index="6">
+    <div>
+<span>mini-ejercicios:</span>
+</div>
+<pre><br>  &gt; (31.173143908).toFixed(3);
+  &gt; console.log(Math.random()&gt;.5?'full understand!':'WTF?');
+
+</pre>
+    <div>
+         <br>
+</div>    
+</div>
+
+
+
+
+</section>
+</section>
+<section>
+    <section data-background-image="https://s3.amazonaws.com/media-p.slid.es/uploads/nax/images/283619/giphy__5_.gif">
+        <h2>
+            <br>
+        </h2>
+<h2>
+        <br>
+    </h2>
+<h2>
+    <span style="background-color: rgba(0, 0, 0, 0.498039);">&nbsp;OBJETOS 101&nbsp;</span>
+</h2>
+</section>
+<section>
+<h2>algunas Formas de crear un objeto</h2>
+<div>
+    <br>
+</div>
+<pre>    <br>  // Objetos "a pelo"
+  var obj0 = new Object;
+  var obj1 = {};
+  obj1.variable1 = 'primer ejemplo';
+    
+  var obj2 = {
+    variable1 : 'ejemplo',
+    variable2 : obj1,
+    funcion   : function() {
+      console.log(this.variable1);
+    }
+  };
+    
+  // Objeto "clonado"
+  var obj3 = Object.create(obj2);
+    
+  // Objetos "predefinidos"
+  var obj4 = new Array(), obj6 = new Date(), obj7 = new RegExp('ab+c');
+
+</pre>
+</section>
+    <section>
+        <h2>algunas Formas de crear un objeto</h2>
+<div>
+<br>
+</div>
+<div>
+        <br>
+</div>
+<pre>        <br>  // Objeto función... aquí hay tomate
+  var Obj1 = function(nombre) {
+    this.nombre = nombre || 'Paquito';
+        
+    this.echo = function() {
+      console.log(this.nombre);
+    }
+  }
+    
+  var obj2 = new Obj1('Marta');
+  var obj3 = new Obj1
+    
+</pre>
+<br>
+    </section>
+    <section data-background-image="https://s3.amazonaws.com/media-p.slid.es/uploads/nax/images/284150/giphy__1_.gif">
+<h2>
+<span style="background-color: rgba(0, 0, 0, 0.498039);">
+    &nbsp;herencia de objeto base </span>&nbsp;</h2>
+<div>
+    <br>
+</div>
+<div>
+    <br>
+</div>
+<div>
+<br>
+</div>
+<div class="fragment" data-fragment-index="0">
+<span style="background-color: rgba(0, 0, 0, 0.498039);">&nbsp;Todos los objetos en JavaScript heredan del objeto base&nbsp;</span>
+</div>
+<div class="fragment" data-fragment-index="0">
+<span style="background-color: rgba(0, 0, 0, 0.498039);">&nbsp;'Object', por lo que poseen sus métodos&nbsp;</span>
+</div>
+<div>
+    <br>
+</div>
+<div>
+    <br>
+</div>
+<div class="fragment" data-fragment-index="1" style="background-color: rgba(255,255,255,.5); color: #000;">
+    <div>
+        <b>&nbsp;mini-ejercicio:&nbsp;</b>
+    </div>
+<pre>        <br>  &gt; var a = {};
+  &gt; a.
+    
+</pre>
+    <br>
+</div>
+    </section>
+</section>
+<section>
+    <section data-background-image="https://s3.amazonaws.com/media-p.slid.es/uploads/nax/images/283637/giphy__13_.gif">
+        <h2>
+            <br>
+        </h2>
+<h2>
+        <br>
+    </h2>
+<h2>
+    <span style="background-color: rgba(0, 0, 0, 0.498039);">&nbsp;objetos&nbsp;</span>
+</h2>
+<div>
+<span style="background-color: rgba(0, 0, 0, 0.498039);">
+    <br>
+</span>
+</div>
+<div>
+<span style="background-color: rgba(0, 0, 0, 0.498039);">&nbsp;VAMOS A &nbsp;PONERNOS SERIOS&nbsp;<br>
+</span>
+</div>
+</section>
+<section data-background-image="https://s3.amazonaws.com/media-p.slid.es/uploads/nax/images/283520/giphy__8_.gif">
+    <h2>
+        <span style="background-color: rgba(0, 0, 0, 0.498039);">&nbsp;Reference type&nbsp;</span>
+    </h2>
+<div class="fragment" data-fragment-index="0">
+<span style="background-color: rgba(0, 0, 0, 0.5);">&nbsp;Objetos si... pero nada de Clases&nbsp;</span>
+</div>
+</section>
+<section data-background-image="https://s3.amazonaws.com/media-p.slid.es/uploads/nax/images/284813/giphy__3_.gif">
+<h2>
+<span style="background-color: rgba(0, 0, 0, 0.498039);">&nbsp;Prototype&nbsp;</span>
+</h2>
+</section>
+<section>
+    <h2>Patrones básicos de</h2>
+<h2>creación de objetos</h2>
+<div>
+    <br>
+</div>
+<div>Combination Constructor/Prototype Pattern<br>
+</div>
+<div>
+    <br>
+</div>
+<pre style="display: inline-block; width: 450px;">
+    <br>  function Persona() {
+    this.nombre = 'Paquito';
+  }
+
+  Persona.prototype = {
+    constructor: Persona,
+    is: function(nombre) {
+      return this.nombre === nombre;
+    }
+  }<br>
+</pre>
+<pre style="display: inline-block; width: 450px;">
+    <br>  var persona1 = new Persona;
+  var persona2 = new Persona();
+  
+  persona1.nombre = 'Macarena';
+  
+  persona1.is('Paquito'); // false
+  persona2.is('Paquito'); // true
+<br>
+    <br>
+</pre>
+<br>
+</section>
+    <section>
+        <h2>PATRONES BÁSICOS DE</h2>
+<h2>CREACIÓN DE OBJETOS</h2>
+<div>
+        <br>
+</div>
+<p>Parasitic Constructor Pattern</p>
+<div>
+        <br>
+</div>
+<pre style="display: inline-block; width: 450px;">
+        <br>  function Persona() {
+    var o = new Object();
+    <span class="fragment" data-fragment-index="0">var sv = 'privado to the limit';</span>
+    o.nombre = 'Paquito';
+    o.is = function(nombre){
+      return this.nombre === nombre;
+    };
+    return o;
+  }
+  <br>
+</pre>
+<pre style="display: inline-block; width: 450px;">
+  <br><br>  var persona1 = new Persona;
+  var persona2 = new Persona();
+  
+  persona1.nombre = 'Macarena';
+  
+  persona1.is('Paquito'); // false
+  persona2.is('Paquito'); // true
+  <br><br>
+</pre>
+<br>
+</section>
+        <section>
+<h2>Patrón básicos de herencia</h2>
+<div>
+    <br>
+</div>
+<div>Combination Inheritance // Pseudoclassical inheritance</div>
+<pre><br>  function SuperTipo(nombre) {
+    this.nombre = nombre;
+  }
+
+  SuperTipo.prototype.diNombre = function() { alert(this.nombre); };
+
+  function SubTipo(nombre, edad) {
+    SuperTipo.call(this, nombre);
+    this.edad = edad;
+  }
+
+  SubTipo.prototype = new SuperTipo();
+  SubTipo.prototype.diEdad = function() { alert(this.edad); };
+  
+  var obj = new SubTipo('Paco', 32);<br><br>        </pre>
+<br>
+    </section>
+    <section data-background-image="https://s3.amazonaws.com/media-p.slid.es/uploads/nax/images/283691/giphy__16_.gif">
+        <h2>
+    <span style="background-color: rgba(0, 0, 0, 0.498039);">&nbsp;Patrón singleton&nbsp;</span>
+</h2>
+<div>
+<br>
+</div>
+<pre style="background-color: rgba(0, 0, 0, 0.498039);">
+        <br>  var singleton = (function() {
+    var variable1; // Secure, "privada"
+    var variable2; // la hacemos "publica"
+    
+    var metodo1 = function() {
+      ...
+    };
+    
+    var metodo2 = function() {
+      ...
+    };
+
+    return {
+      nombre: variable1,
+      metodo: metodo2
+    };
+  })();<br>
+</pre>
+
+<br>
+</section>
+    </section>
+    <section>
+        <section data-background-image="https://s3.amazonaws.com/media-p.slid.es/uploads/nax/images/283700/giphy__17_.gif">
+<h2>
+        <span style="background-color: rgba(0, 0, 0, 0.498039);">&nbsp;DOM Events&nbsp;</span>
+    </h2>
+</section>
+<section data-background-image="https://s3.amazonaws.com/media-p.slid.es/uploads/nax/images/284169/giphy__2_1.gif">
+<h2>
+    <span style="background-color: rgba(0, 0, 0, 0.498039);">&nbsp;eventos!&nbsp;</span>
+    <br>
+</h2>
+<div>
+    <br>
+</div>
+<div>
+    <br>
+</div>
+<div>
+    <br>
+</div>
+<div>
+    <span style="background-color: rgba(0, 0, 0, 0.498039);" class="fragment" data-fragment-index="0">&nbsp;¿Qué?&nbsp;</span>
+    <span style="background-color: rgba(0, 0, 0, 0.498039);" class="fragment" data-fragment-index="1">&nbsp;¿Dónde?&nbsp;</span>
+    <span style="background-color: rgba(0, 0, 0, 0.498039);" class="fragment" data-fragment-index="2">&nbsp;¿Cuándo?&nbsp;</span>
+</div>
+<div>
+    <br>
+</div>
+<div>
+    <span style="background-color: rgba(0, 0, 0, 0.498039);" class="fragment" data-fragment-index="3">
+<a href="http://www.w3schools.com/jsref/dom_obj_event.asp">&nbsp;HTML DOM EVENTS&nbsp;</a>
+</span>
+</div>
+
+</section>
+<section>
+<h2>bind: asignación de eventos</h2>
+<div>
+<br>
+</div>
+<div>
+    <br>
+</div>
+<div>
+
+<pre><br>  &lt;p onmouseover="alert('de loco es poco')"&gt;Elemento con evento&lt;/p&gt;<br><br></pre>
+<br>
+</div>
+<div>Perfe!... <span class="fragment" data-fragment-index="0">NI DE COÑA</span>
+</div>
+<div>
+<br>
+</div>
+<div>
+<ul>
+<li class="fragment" data-fragment-index="1">Contaminación estética del HTML</li>
+<li class="fragment" data-fragment-index="2">Mezcla de roles</li>
+<li class="fragment" data-fragment-index="3">Spaghetti to the limit<br>
+</li>
+<li class="fragment" data-fragment-index="4">Contaminación del&nbsp;<i>Global Scope</i>
+</li>
+</ul>
+</div>
+</section>
+<section>
+<h2>bind: event listeners</h2>
+<div>
+    <br>
+</div>
+<div>
+<br>
+</div>
+<pre><br>  &lt;button&gt;BOTÓN&lt;/button&gt;
+<br></pre>
+<div>
+<br>
+</div>
+<pre><br>  function daleCandela() {
+    alert('de loco es poco');
+  }
+  
+  var elemento = document.getElementsByTagName('button')[0];
+  elemento.addEventListener('click', daleCandela);<br><br></pre>
+<br>
+
+</section>
+<section>
+<h2>Mini-ejercicio</h2>
+<div>
+<br>
+</div>
+<pre><br>  &gt; document.getElementById('hplogo').addEventListener(
+      'mouseover',
+      function() {
+        var titulo = this.attributes.title.value;
+        
+        document.querySelector('input[name=q]').value = titulo;
+        
+        setTimeout(function() {
+          window.location.href = 'http://www.google.es/#q='+titulo;
+        }, 2000)
+      }
+    );<br><br></pre>
+</section>
+</section>
+<section>
+    <section data-background-image="https://s3.amazonaws.com/media-p.slid.es/uploads/nax/images/283681/giphy__15_.gif">
+        <h2>
+    <span style="background-color: rgba(0, 0, 0, 0.498039);">&nbsp;Introducción a jquery&nbsp;</span>
+</h2>
+</section>
+<section>
+    <h2>Que es jquery?</h2>
+<div>
+    <br>
+</div>
+<div>
+<br>
+</div>
+<blockquote>jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers.&nbsp;</blockquote>
+<br>
+</section>
+<section data-background-image="https://s3.amazonaws.com/media-p.slid.es/uploads/nax/images/285210/giphy__6_.gif">
+<h2>
+<span style="background-color: rgba(0, 0, 0, 0.498039);">&nbsp;eso ya lo hace mi querido javascript&nbsp;</span>
+    <br>
+</h2>
+<h2>
+    <span style="background-color: rgba(0, 0, 0, 0.498039);">&nbsp;sin tener que cargar más chasca&nbsp;</span>
+</h2>
+</section>
+<section>
+    <h2>Algunos ejemplos</h2>
+    <div>
+        <br>
+    </div>
+<div>"ejemplos-mini-ejercicio"</div>
+<pre>    <br>  &gt; $('ul').first().css('background-color', '#32FA25')
+    
+  &gt; var a = $('&lt;a&gt;', {text: 'JS de 0 a 100!'});
+  &gt; $('&lt;li&gt;').append(a).appendTo($('ul').first());
+  
+  &gt; $('a').each(function() {
+      if($(this).text() === 'Maquetador')
+        $(this).parent().remove();
+    });
+    
+  &gt; $('.box_col');
+  &gt; $('.box_col').bind('mouseover', function() {
+      alert('¡JavaScript de 0 a 100!');
+    });<br>
+</pre>
+<a>
+<br>
+</a>
+
+
+
+
+</section>
+</section>
+<section>
+    <h2>VÍNCULOS de INTERÉS</h2>
+    <div>
+        <br>
+    </div>
+    <div>
+        <br>
+    </div>
+    <div>
+        <ul>
+            <li>
+                <a href="http://bonsaiden.github.io/JavaScript-Garden/es/">http://bonsaiden.github.io/JavaScript-Garden/es/</a>
+                <br>
+            </li>
+            <li>
+                <a href="http://www.slideshare.net/Adieu/advanced-javascript">http://www.slideshare.net/Adieu/advanced-javascript</a>
+                <br>
+            </li>
+            <li>
+                <a href="http://ejohn.org/blog/simple-javascript-inheritance/">http://ejohn.org/blog/simple-javascript-inheritance/</a>
+                <br>
+            </li>
+            <li>
+                <a href="http://www.bolinfest.com/javascript/inheritance.php">http://www.bolinfest.com/javascript/inheritance.php</a>
+                <br>
+            </li>
+            <li>
+                <a href="http://jquery.com/">http://www.jquery.com/</a>
+                <br>
+            </li>
+        </ul>
+        <div style="text-align: center;">
+            <br>
+        </div>
+    </div>
+    <div style="text-align: center;">
+        <ul>
+            <li>
+                <a href="https://github.com/NaxYo/js-0-100">https://github.com/NaxYo/js-0-100</a>
+                <br>
+            </li>
+        </ul>
+    </div>
+    <div style="text-align: left;">
+        <br>
+    </div>
+</section>
+</div>
+
+
+		</div>
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+				backgroundTransition: 'zoom',
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
