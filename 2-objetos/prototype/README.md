@@ -16,6 +16,9 @@ El ejercicio constará de dos partes:
 
 ### ¿Por qué este tipo de implementaciones es una mala práctica?
 
+No lo se exactamente, pero supongo que será porque la de modificar o añadir nuestros propios métodos a los tipos primitivos del lenguaje no es la mejor forma para implementar ciertas funcionalidades.
+
+Si se necesita añadir alguna funcionalidad para trabajar con estos tipos propios del lenguaje, se podría hacer mediante funciones o clases propias.
 
 ### ¿Cómo?
 
