@@ -18,6 +18,7 @@ Este repositorio pretende ser un punto de partida en el cual ir planteando ejerc
 * [Sesión #1: Introducción - Ambito de variables y funciones anónimas](https://github.com/NaxYo/js-0-100/tree/master/1-intro/scope "Ejercicio de la primer sesión: ambito de variables y funciones anónimas")
 * [Sesión #1: Introducción - Funciones, parámetros y más](https://github.com/NaxYo/js-0-100/tree/master/1-intro/function "Ejercicio de la primer sesión: funciones, parámetros y más")
 * [Sesión #2: Objetos - Prototipado de objetos](https://github.com/NaxYo/js-0-100/tree/master/2-objetos/prototype "Ejercicio de la segunda sesión: prototipado de objetos")
+* [Sesión #2: Objetos - Herencia de objetos e introducción de canvas&video tags](https://github.com/NaxYo/js-0-100/tree/master/2-objetos/herencia "Ejercicio de la segunda sesión: Herencia de objetos e introducción de canvas&video tags")
 
 ### Estructura
 
