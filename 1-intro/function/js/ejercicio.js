@@ -22,7 +22,7 @@ var EJERCICIO = (function() {
 	}
 
 	// 4. Incluye una linea para llamar a la función tapaDeAPoco cada 1/4 de segundo
-
+	setInterval(tapaDeAPoco, 250);
 	return function() {
 		/*
 		 * 1. Usa la función dibujaCirculo para dibujar todos los circulos pasados por parametro
@@ -32,6 +32,25 @@ var EJERCICIO = (function() {
 		 *
 		 * 3. Dibuja cada circulo en un color aleatorio
 		 */
+
+		 if(arguments.length == 0){
+		 	for(var i=1; i<=Math.floor((Math.random()*100)+1); i++){
+		 		var x = Math.floor((Math.random()*400)+1);
+		 		var y = Math.floor((Math.random()*200)+1);
+		 		var radio = Math.floor((Math.random()*30)+1);
+		 		var color = {r: Math.floor((Math.random()*255)+1), g: Math.floor((Math.random()*255)+1), b: Math.floor((Math.random()*255)+1)};
+
+		 		dibujaCirculo(x,y,radio,color);
+		 	}
+		 }else{
+		 	for(var i=0; i<arguments.length; i++){
+		 		var color = {r: Math.floor((Math.random()*255)+1), g: Math.floor((Math.random()*255)+1), b: Math.floor((Math.random()*255)+1)};
+		 		if(arguments[i][2] != undefined)
+		 			dibujaCirculo(arguments[i][0], arguments[i][1], arguments[i][2], color);
+		 		else
+		 			dibujaCirculo(arguments[i][0], arguments[i][1], 0, color);
+		 	}
+		 }
 	};
 })();
 
